@@ -117,10 +117,9 @@ Result:
 ## 3. Crack Password
 ```php
 User: carl
-Copy the hash string in full (e.g., bob:*HASH) to a text file on your local 
 ```
 
-machine called hash.txt:
+Copy the hash string in full (e.g., bob:*HASH) to a text file on your local machine called hash.txt:
 ```bash
 touch hash.txt
 vi hash.txt
@@ -150,13 +149,11 @@ Session completed.
 
 What are the chances that this user has reused their password for a different service?
 ```bash
-Copiar código
 ssh carl@10.10.210.104
 Password: doggie
 ```
 
 ```bash
-Copiar código
 ls
 cat MySQL.txt
 ```
