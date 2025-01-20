@@ -359,7 +359,10 @@ rm -rf breakme
 
 Access as admin:
 
+User:
 admin
+
+Password:
 12345678
 
 Copy the hash string in full, like: admin:*HASH
