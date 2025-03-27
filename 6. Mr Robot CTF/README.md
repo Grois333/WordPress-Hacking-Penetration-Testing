@@ -3,7 +3,7 @@
 ## Introduction
 This is a walkthrough for the **Mr. Robot CTF** challenge from TryHackMe. In this guide, we will go through the steps to exploit a vulnerable machine and capture all three keys.
 
-![Intro Image]()
+![Intro Image](https://raw.githubusercontent.com/Grois333/WordPress-Hacking-Penetration-Testing/refs/heads/master/6.%20Mr%20Robot%20CTF/images/intro-image.webp)
 
 ---
 
@@ -26,7 +26,7 @@ This is a walkthrough for the **Mr. Robot CTF** challenge from TryHackMe. In thi
 ```
 - The site contains references to the **Mr. Robot** TV show, but nothing useful for exploitation.
 
-![Easteregg Image]()
+![Easter Egg Image](https://raw.githubusercontent.com/Grois333/WordPress-Hacking-Penetration-Testing/refs/heads/master/6.%20Mr%20Robot%20CTF/images/eateregg.webp)
 
 ### 3. Scan for Open Ports
 - Run `nmap` to scan the target:
@@ -165,4 +165,4 @@ Happy hacking! 🕵️‍♂️💻
 
 Badge Obtained:
 
-![Badge Image]()
+![Badge Image](https://raw.githubusercontent.com/Grois333/WordPress-Hacking-Penetration-Testing/refs/heads/master/6.%20Mr%20Robot%20CTF/images/mrrobot-badge.png)
