@@ -21,10 +21,12 @@ Dive into the world of WordPress 5.0 vulnerabilities with a blog created by "Bil
 ### 5. All in One
 An advanced box with multiple attack vectors. Exploit the system using both intended and unintended methods to gain user and root access.
 
-### 6. Hacking WordPress (Hack the Box)
+### 6. Mr Robot CTF
+Based on the Mr. Robot show, can you root this box?
+
+### 7. Hacking WordPress (Hack the Box)
 Learn WordPress exploitation techniques through the Hack the Box academy course.
 
-### 7. Skills Assessment - WordPress
+### 8. Skills Assessment - WordPress
 A comprehensive assessment to test your WordPress hacking and security knowledge.
 
----
